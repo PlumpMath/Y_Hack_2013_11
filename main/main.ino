@@ -1,7 +1,49 @@
 //includes
 #include <Wire.h>
-#include "Vendor/Adafruit_MCP23017.h"
-#include "Vendor/UnoJoy.h"
+#include "../vendor/Adafruit_MCP23017.h"
+#include "../vendor/UnoJoy.h"
+
+#include "../classes/Controller.cpp"
+
+class Controller
+{
+    public:
+        Controller();
+        void setupPins();
+        void prepare(int);
+
+    private:
+        int buttons[7];
+        dataForController_t bin;
+
+        Adafruit_MCP23017 mcp;
+}
+
+Controller::Controller() {
+    setupPins();
+    setupUnoJoy();
+}
+
+void Controller::setupPins() {
+    //buttons on Adafruit
+    for (int i = 0; i < 8; i++) {
+        prepare(i, true);
+    }
+
+    //axis
+    prepare(A0, false);
+    prepare(A1, false);
+}
+
+void Controller::prepare(int pin, bool ada) {
+    if (ada) {
+        pinMode(pin, INPUT);
+        digitalWrite(pin, HIGH);
+    } else {
+        mcp.pinMode(pin, INPUT);
+        mcp.digitalWrite(pin, HIGH);
+    }
+}
 
 Adafruit_MCP23017 mcp;
 dataForController_t controllerData;
