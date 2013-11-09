@@ -1,13 +1,9 @@
-#include "Arduino.h"
-#ifndef Adafruit_MCP23017
-    #include "Adafruit_MCP23017.h"
-#endif
 
-#ifndef dataForController_t
-    #include "UnoJoy.h"
-#endif
-#ifndef Controller_h
-#define Controller_h
+#ifndef CONTROLLER_H
+#define CONTROLLER_H
+#include "Arduino.h"
+#include "Adafruit_MCP23017.h"
+#include "UnoJoy.h"
 
 class Controller
 {
