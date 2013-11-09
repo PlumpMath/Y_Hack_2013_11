@@ -16,6 +16,9 @@ void loop() {
 	Wire.requestFrom(0x20, 1);
 
 	int inputs = Wire.read();
-
-	Serial.println(inputs);
+        if (inputs>0)
+        {
+          Serial.println(inputs,BIN);
+          delay(200);
+        }
 }
