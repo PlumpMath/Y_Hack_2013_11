@@ -1,15 +1,16 @@
 class Controller
 {
-    public:
-        Controller();
-        void setupPins();
-        void prepare(int);
+    Controller();
 
-    private:
-        int buttons[7];
-        dataForController_t bin;
+    void setupPins();
+    void prepare(int, bool);
+    void read(int, bool);
+    void push();
 
-        Adafruit_MCP23017 mcp;
+    int buttons[8];
+    dataForController_t bin;
+
+    Adafruit_MCP23017 mcp;
 }
 
 Controller::Controller() {
@@ -41,9 +42,36 @@ void Controller::prepare(int pin, bool ada) {
 void Controller::read(int pin, bool ada) {
     for (int i = 0; i < 8; i++) {
         if (ada == false) {
-            !digitalRead(pin);
+            analogRead(pin);
         } else {
             !mcp.digitalRead(pin);
         }
     }
+}
+
+void Controller::push() {
+    return bin;
+}
+
+dataForController_t get() {
+    dataForController_t data = getBlankDataForController();
+    int controller_buttons[8] = {
+        "triangleOn",
+        "circleOn",
+        "squareOn",
+        "crossOn",
+        "dpadDownOn",
+        "dpadLeftOn",
+        "dpadRightOn",
+        "lqOn"
+    };
+
+    for (int i = 0; i < 8; i++) {
+        data[controller_buttons[i]] = read(i, true);
+    }
+
+    data.leftStickX = read(A0, false);
+    data.leftStickY = read(A1, false);
+
+    return data;
 }
