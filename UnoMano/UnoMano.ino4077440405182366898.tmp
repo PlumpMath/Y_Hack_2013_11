@@ -81,15 +81,15 @@ int readPin(int pin, bool ada) {
 dataForController_t getControllerData() {
     dataForController_t data = getBlankDataForController();
 
-    data.triangleOn = readPin(28, true);
-    data.circleOn = readPin(27, true);
-    data.squareOn = readPin(26, true);
-    data.crossOn = readPin(25, true);
+    data.triangleOn = readPin(0+8, true);
+    data.circleOn = readPin(1+8, true);
+    data.squareOn = readPin(2+8, true);
+    data.crossOn = readPin(3+8, true);
     //data.dpadUpOn = readPin(, true);
-    data.dpadDownOn = readPin(24, true);
-    data.dpadLeftOn = readPin(23, true);
-    data.dpadDownOn = readPin(22, true);
-    data.l1On = readPin(21, true);
+    data.dpadDownOn = readPin(4+8, true);
+    data.dpadLeftOn = readPin(5+8, true);
+    data.dpadDownOn = readPin(6+8, true);
+    data.l1On = readPin(7+8, true);
     //data.r1On = readPin(, true);
     //data.selectOn = readPin(, true);
     //data.startOn = readPin(, true);
