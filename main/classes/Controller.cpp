@@ -1,4 +1,5 @@
 
+
 void Controller::setup() {
     setupPins();
     setupUnoJoy();
@@ -56,8 +57,8 @@ dataForController_t Controller::get() {
     //data.startOn = read(, true);
     //data.homeOn = read(, true);
 
-    data.leftStickX = read(A0, false);
-    data.leftStickY = read(A1, false);
+    data.leftStickX = read(A3, false);
+    data.leftStickY = read(A2, false);
 
     return data;
 }
