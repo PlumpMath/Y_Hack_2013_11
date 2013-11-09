@@ -1,6 +1,4 @@
-
-<!-- saved from url=(0097)https://raw.github.com/michaelmoskie/Adafruit-MCP23017-Arduino-Library/master/Adafruit_MCP23017.h -->
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style type="text/css"></style></head><body><pre style="word-wrap: break-word; white-space: pre-wrap;">/*************************************************** 
+/*************************************************** 
   This is a library for the MCP23017 i2c port expander
 
   These displays use I2C to communicate, 2 pins are required to  
@@ -63,4 +61,3 @@ public:
 #define MCP23017_OLATB 0x15
 
 #endif
-</pre></body></html>

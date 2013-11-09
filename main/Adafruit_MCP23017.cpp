@@ -1,6 +1,4 @@
-
-<!-- saved from url=(0099)https://raw.github.com/michaelmoskie/Adafruit-MCP23017-Arduino-Library/master/Adafruit_MCP23017.cpp -->
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style type="text/css"></style></head><body><pre style="word-wrap: break-word; white-space: pre-wrap;">/*************************************************** 
+/*************************************************** 
   This is a library for the MCP23017 i2c port expander
 
   These displays use I2C to communicate, 2 pins are required to  
@@ -13,11 +11,11 @@
   BSD license, all text above must be included in any redistribution
  ****************************************************/
 
-#include &lt;Wire.h&gt;
-#include &lt;avr/pgmspace.h&gt;
+#include <Wire.h>
+#include <avr/pgmspace.h>
 #include "Adafruit_MCP23017.h"
 
-#if ARDUINO &gt;= 100
+#if ARDUINO >= 100
  #include "Arduino.h"
 #else
  #include "WProgram.h"
@@ -25,7 +23,7 @@
 
 // minihelper
 static inline void wiresend(uint8_t x) {
-#if ARDUINO &gt;= 100
+#if ARDUINO >= 100
   Wire.write((uint8_t)x);
 #else
   Wire.send(x);
@@ -33,7 +31,7 @@ static inline void wiresend(uint8_t x) {
 }
 
 static inline uint8_t wirerecv(void) {
-#if ARDUINO &gt;= 100
+#if ARDUINO >= 100
   return Wire.read();
 #else
   return Wire.receive();
@@ -43,7 +41,7 @@ static inline uint8_t wirerecv(void) {
 ////////////////////////////////////////////////////////////////////////////////
 
 void Adafruit_MCP23017::begin(uint8_t addr) {
-  if (addr &gt; 7) {
+  if (addr > 7) {
     addr = 7;
   }
   i2caddr = addr;
@@ -73,10 +71,10 @@ void Adafruit_MCP23017::pinMode(uint8_t p, uint8_t d) {
   uint8_t iodiraddr;
 
   // only 16 bits!
-  if (p &gt; 15)
+  if (p > 15)
     return;
 
-  if (p &lt; 8)
+  if (p < 8)
     iodiraddr = MCP23017_IODIRA;
   else {
     iodiraddr = MCP23017_IODIRB;
@@ -93,9 +91,9 @@ void Adafruit_MCP23017::pinMode(uint8_t p, uint8_t d) {
 
   // set the pin and direction
   if (d == INPUT) {
-    iodir |= 1 &lt;&lt; p; 
+    iodir |= 1 << p; 
   } else {
-    iodir &amp;= ~(1 &lt;&lt; p);
+    iodir &= ~(1 << p);
   }
 
   // write the new IODIR
@@ -117,7 +115,7 @@ uint16_t Adafruit_MCP23017::readGPIOAB() {
   Wire.requestFrom(MCP23017_ADDRESS | i2caddr, 2);
   a = wirerecv();
   ba = wirerecv();
-  ba &lt;&lt;= 8;
+  ba <<= 8;
   ba |= a;
 
   return ba;
@@ -126,8 +124,8 @@ uint16_t Adafruit_MCP23017::readGPIOAB() {
 void Adafruit_MCP23017::writeGPIOAB(uint16_t ba) {
   Wire.beginTransmission(MCP23017_ADDRESS | i2caddr);
   wiresend(MCP23017_GPIOA);	
-  wiresend(ba &amp; 0xFF);
-  wiresend(ba &gt;&gt; 8);
+  wiresend(ba & 0xFF);
+  wiresend(ba >> 8);
   Wire.endTransmission();
 }
 
@@ -136,10 +134,10 @@ void Adafruit_MCP23017::digitalWrite(uint8_t p, uint8_t d) {
   uint8_t gpioaddr, olataddr;
 
   // only 16 bits!
-  if (p &gt; 15)
+  if (p > 15)
     return;
 
-  if (p &lt; 8) {
+  if (p < 8) {
     olataddr = MCP23017_OLATA;
     gpioaddr = MCP23017_GPIOA;
   } else {
@@ -158,9 +156,9 @@ void Adafruit_MCP23017::digitalWrite(uint8_t p, uint8_t d) {
 
   // set the pin and direction
   if (d == HIGH) {
-    gpio |= 1 &lt;&lt; p; 
+    gpio |= 1 << p; 
   } else {
-    gpio &amp;= ~(1 &lt;&lt; p);
+    gpio &= ~(1 << p);
   }
 
   // write the new GPIO
@@ -175,10 +173,10 @@ void Adafruit_MCP23017::pullUp(uint8_t p, uint8_t d) {
   uint8_t gppuaddr;
 
   // only 16 bits!
-  if (p &gt; 15)
+  if (p > 15)
     return;
 
-  if (p &lt; 8)
+  if (p < 8)
     gppuaddr = MCP23017_GPPUA;
   else {
     gppuaddr = MCP23017_GPPUB;
@@ -196,9 +194,9 @@ void Adafruit_MCP23017::pullUp(uint8_t p, uint8_t d) {
 
   // set the pin and direction
   if (d == HIGH) {
-    gppu |= 1 &lt;&lt; p; 
+    gppu |= 1 << p; 
   } else {
-    gppu &amp;= ~(1 &lt;&lt; p);
+    gppu &= ~(1 << p);
   }
 
   // write the new GPIO
@@ -212,10 +210,10 @@ uint8_t Adafruit_MCP23017::digitalRead(uint8_t p) {
   uint8_t gpioaddr;
 
   // only 16 bits!
-  if (p &gt; 15)
+  if (p > 15)
     return 0;
 
-  if (p &lt; 8)
+  if (p < 8)
     gpioaddr = MCP23017_GPIOA;
   else {
     gpioaddr = MCP23017_GPIOB;
@@ -228,6 +226,5 @@ uint8_t Adafruit_MCP23017::digitalRead(uint8_t p) {
   Wire.endTransmission();
   
   Wire.requestFrom(MCP23017_ADDRESS | i2caddr, 1);
-  return (wirerecv() &gt;&gt; p) &amp; 0x1;
+  return (wirerecv() >> p) & 0x1;
 }
-</pre></body></html>
