@@ -1,9 +1,8 @@
 //includes
 #include <Wire.h>
-#include <vendor/Adafruit_MCP23017.h>
-#include <vendor/UnoJoy.h>
-
-#include <classes/Controller.h>
+#include "Adafruit_MCP23017.h"
+#include "UnoJoy.h"
+#include "Controller.h"
 
 void setup() {
     Controller c = new Controller();

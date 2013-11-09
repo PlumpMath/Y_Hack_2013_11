@@ -1,10 +1,7 @@
-#ifndef Adafruit_MCP23017
-    #include <../vendor/Adafruit_MCP23017.h>
-#endif
+#ifndef Controller.h
+#define Controller.h
 
-#ifndef dataForController_t
-    #include <../vendor/UnoJoy.h>
-#endif
+#include "Ardiono.h"
 
 class Controller
 {
@@ -22,3 +19,4 @@ class Controller
 
     Adafruit_MCP23017 mcp;
 };
+#endif
