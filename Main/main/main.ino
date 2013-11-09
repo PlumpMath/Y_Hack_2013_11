@@ -1,5 +1,5 @@
 #include <Wire.h>
-#include "Adafruit_MCP23017.h"
+#include "Vendor/Adafruit_MCP23017.h"
 
 Adafruit_MCP23017 mcp;
 
