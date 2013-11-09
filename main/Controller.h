@@ -1,22 +1,29 @@
-#ifndef Controller.h
-#define Controller.h
+#include "Arduino.h"
+#ifndef Adafruit_MCP23017
+    #include "Adafruit_MCP23017.h"
+#endif
 
-#include "Ardiono.h"
+#ifndef dataForController_t
+    #include "UnoJoy.h"
+#endif
+#ifndef Controller_h
+#define Controller_h
 
 class Controller
 {
-    Controller();
+	public:
+		Controller();
 
-    void setup();
-    void setupPins();
-    void prepare(int, bool);
-    void read(int, bool);
-    void push();
-    dataForController_t get();
+		void setup();
+		void setupPins();
+		void prepare(int, bool);
+		void read(int, bool);
+		void push();
+		dataForController_t get();
 
-    int buttons[8];
-    dataForController_t bin;
+		int buttons[8];
+		dataForController_t bin;
 
-    Adafruit_MCP23017 mcp;
+		Adafruit_MCP23017 mcp;
 };
 #endif
