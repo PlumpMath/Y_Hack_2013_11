@@ -1,12 +1,12 @@
 //includes
 #include <Wire.h>
-#include "../vendor/Adafruit_MCP23017.h"
-#include "../vendor/UnoJoy.h"
+#include <vendor/Adafruit_MCP23017.h>
+#include <vendor/UnoJoy.h>
 
-#include "../classes/Controller.cpp"
+#include <classes/Controller.h>
 
 void setup() {
-    Controller c;
+    Controller c = new Controller();
 
     c.setup();
 
@@ -15,7 +15,7 @@ void setup() {
 }
 
 void loop() {
-    Controller c;
+    Controller c = new Controller();
 
     c.push();
 }
