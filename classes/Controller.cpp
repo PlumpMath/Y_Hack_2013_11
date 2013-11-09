@@ -2,10 +2,12 @@ class Controller
 {
     Controller();
 
+    void setup();
     void setupPins();
     void prepare(int, bool);
     void read(int, bool);
     void push();
+    dataForController_t get();
 
     int buttons[8];
     dataForController_t bin;
@@ -13,7 +15,7 @@ class Controller
     Adafruit_MCP23017 mcp;
 }
 
-Controller::Controller() {
+void Controller::setup() {
     setupPins();
     setupUnoJoy();
 }
@@ -50,25 +52,25 @@ void Controller::read(int pin, bool ada) {
 }
 
 void Controller::push() {
-    return bin;
+    setControllerData(get());
 }
 
-dataForController_t get() {
+dataForController_t Controller::get() {
     dataForController_t data = getBlankDataForController();
-    int controller_buttons[8] = {
-        "triangleOn",
-        "circleOn",
-        "squareOn",
-        "crossOn",
-        "dpadDownOn",
-        "dpadLeftOn",
-        "dpadRightOn",
-        "lqOn"
-    };
 
-    for (int i = 0; i < 8; i++) {
-        data[controller_buttons[i]] = read(i, true);
-    }
+    data.triangleOn = read(0, true);
+    data.circleOn = read(1, true);
+    data.squareOn = read(2, true);
+    data.crossOn = read(3, true);
+    //data.dpadUpOn = read(, true);
+    data.dpadDownOn = read(4, true);
+    data.dpadLeftOn = read(5, true);
+    data.dpadDownOn = read(6, true);
+    data.l1On = read(7, true);
+    //data.r1On = read(, true);
+    //data.selectOn = read(, true);
+    //data.startOn = read(, true);
+    //data.homeOn = read(, true);
 
     data.leftStickX = read(A0, false);
     data.leftStickY = read(A1, false);
