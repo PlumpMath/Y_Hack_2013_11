@@ -5,7 +5,7 @@
 #include "Controller.h"
 
 void setup() {
-    Controller c = new Controller();
+    Controller c;
 
     c.setup();
 
@@ -14,7 +14,7 @@ void setup() {
 }
 
 void loop() {
-    Controller c = new Controller();
+    Controller c;
 
     c.push();
 }

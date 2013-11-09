@@ -17,7 +17,7 @@ class Controller
 		void setup();
 		void setupPins();
 		void prepare(int, bool);
-		void read(int, bool);
+		int read(int, bool);
 		void push();
 		dataForController_t get();
 

@@ -27,12 +27,12 @@ void Controller::prepare(int pin, bool ada) {
     }
 }
 
-void Controller::read(int pin, bool ada) {
+int Controller::read(int pin, bool ada) {
     for (int i = 0; i < 8; i++) {
         if (ada == false) {
-            analogRead(pin);
+            return analogRead(pin);
         } else {
-            !mcp.digitalRead(pin);
+            return !mcp.digitalRead(pin);
         }
     }
 }
