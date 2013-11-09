@@ -45,7 +45,7 @@ void loop() {
     setControllerData(controllerData);
 }
 
-dataForController_T getControllerData() {
+dataForController_t getControllerData() {
     dataForController_t controllerData = getBlankDataForController();
 
     controllerData.triangleOn = !mcp.digitalRead(TRIANGLE);
