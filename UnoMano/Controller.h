@@ -4,7 +4,7 @@
 #include "Arduino.h"
 #include "Adafruit_MCP23017.h"
 #include "UnoJoy.h"
-
+#include <Wire.h>
 class Controller
 {
 	public:

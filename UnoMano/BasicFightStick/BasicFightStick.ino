@@ -1,6 +1,7 @@
 
 #include "UnoJoy.h"
-
+#include "Adafruit_MCP23017.h"
+#include <Wire.h>
 // Define our pins
 int TrianglePin = 4;
 int SquarePin = 5;
